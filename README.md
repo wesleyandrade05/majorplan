@@ -1,3 +1,5 @@
+This was part of my CPSC 100's Final Project at Yale University.
+
 # Where to Compile?
 
 The website was designed to run in the codespace. To do it, you just have to run **flask run** in the console. The database can be seen using **phpliteadmin majorplan.db**
