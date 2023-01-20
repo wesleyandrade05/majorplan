@@ -21,7 +21,7 @@ for subject in subjects:
     # Make a different request for each season
     for season in seasons:
         # Request to obtain the list of courses for that specific subject in that specific term
-        courses = requests.get("https://gw.its.yale.edu/soa-gateway/courses/webservice/v3/index?apikey=l79faf1b42595a4ad7b803c43fa53d252c&termCode="+season+"&subjectCode="+ subject["code"] +"&mode=json")
+        courses = requests.get("https://gw.its.yale.edu/soa-gateway/courses/webservice/v3/index?apikey=[APIKEY]&termCode="+season+"&subjectCode="+ subject["code"] +"&mode=json")
 
         # Convert the responses into a list of dictionaries
         courses = courses.json()

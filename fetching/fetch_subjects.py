@@ -10,7 +10,7 @@ Information provided by Yale API Portal
 db = SQL("sqlite:///majorplan.db")
 
 # Request subjects from API
-subjects = requests.get("https://gw.its.yale.edu/soa-gateway/course/webservice/v2/subjects?apikey=l79faf1b42595a4ad7b803c43fa53d252c&mode=json")
+subjects = requests.get("https://gw.its.yale.edu/soa-gateway/course/webservice/v2/subjects?apikey=[APIKEY]&mode=json")
 
 # Convert the responses into a list of dictionaries
 readable= subjects.json()
