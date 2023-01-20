@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<form action="/" method="post" class="row row-cols-lg-auto g-3 align-items-center" id="subject-form">
+    <div class="col-12">
+        <input type="text" class="form-control" placeholder="Course" name="course-search">
+    </div>
+    <div class="col-12">
+        <select class="form-select" aria-label="Default select example" name="subject-search">
+            <option selected>Subject</option>
+            {% for subject in subjects %}
+                <option value={{subject.code}}>{{subject.code}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-12">
+        <select class="form-select" aria-label="Default select example" name="term-search">
+            <option selected>Term</option>
+            <option value="202301">Spring 2023</option>
+            <option value="202203">Fall 2022</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+{% if not course_results %}
+<div class="alert alert-danger" role="alert" style="text-align: center; margin-top: 2%">
+    Sorry, no courses were found!
+</div>
+{% endif %}
+
+<div class="list-group" id = subjects-results>
+    {% for course in course_results %}
+        <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#course" data-bs-course="{{course.description}}" data-bs-number="{{course.subjectNumber}}" data-bs-requirements='{{course.prerequisites | safe}}' data-bs-crn='{{course.crn}}' data-bs-distributionals='{{distributionals[course.subjectNumber]}}'>
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" name="courseTitle">{{course.courseTitle}}</h5>
+                <small name="subjectNumber">{{course.subjectNumber}}</small>
+            </div>
+            <p>Section: {{course.sectionNumber}}</p>
+            {% if course.termCode == 202203 %}
+                <p name="term" value="202203">Term: Fall 2022</p>
+            {% elif course.termCode == 202301 %}
+                <p name="term" value="202301">Term: Spring 2023</p>
+            {% endif %}
+            <p>
+                Distributionals:
+                {% for distributional in distributionals[course.subjectNumber]%}
+                    {{distributional}}
+                {% endfor %}
+            </p>
+            <div>
+                {% if course.prerequisites != NULL %}
+                    {{ course.prerequisites | safe}}
+                {% endif %}
+            </div>
+        </button>
+    {% endfor %}
+
+<form action="/add_course" method="post">
+    <div class="modal fade" id="course" tabindex="-1" aria-labelledby="course" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Course</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div id="description">
+
+                </div>
+                <div class="alert alert-danger" role="alert" id="requirements">
+
+                </div>
+              </div>
+              <div class="container-fluid" style="margin-bottom: 4%">
+                <select class="form-select" aria-label="major" name="major">
+                    <option selected>Major?</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <select class="form-select" name="credits">
+                    <option selected>Credits</option>
+                    <option value=0.5>0.5</option>
+                    <option value=1.0>1</option>
+                    <option value=1.5>1.5</option>
+                    <option value=2.0>2.0</option>
+                </select>
+                <select class="form-select" name="distributional" id="distributional">
+                    <option selected>Distributional Requirement</option>
+                    <option value="YCQR">YCQR</option>
+                    <option value="YCSC">YCSC</option>
+                    <option value="YCSO">YCSO</option>
+                    <option value="YCWR">YCWR</option>
+                    <option value="YCHU">YCHU</option>
+                    <option value="YCLA">YCL</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <input type="hidden" id='course_crn' name="course_crn" value="course_crn">
+                <button type="submit" class="btn btn-primary">Add Course</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+    </div>
+</form>
+
+</div>
+
+<script>
+
+    const course = document.getElementById('course');
+    course.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
+        const subjectNumber = button.getAttribute('data-bs-number');
+        const courseDescription = button.getAttribute('data-bs-course');
+        const courseRequirements = button.getAttribute('data-bs-requirements');
+        const courseCrn = button.getAttribute('data-bs-crn');
+        const modalTitle = course.querySelector('.modal-title');
+        const modalDescription = course.querySelector('#description');
+        const modalRequirements = course.querySelector('#requirements');
+        const input = course.querySelector("#course_crn");
+        const modalDistributionals = course.querySelector("#distributional");
+
+        modalTitle.innerHTML = subjectNumber;
+        modalDescription.innerHTML = courseDescription;
+        modalRequirements.innerHTML = courseRequirements;
+        input.value = courseCrn;
+    });
+</script>
+{% endblock %}

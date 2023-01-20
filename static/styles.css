@@ -1,0 +1,63 @@
+
+.container-fluid {
+    width: 80%;
+}
+
+.navbar-brand {
+    margin-left: 3.5%;
+}
+
+.navbar-nav {
+    margin-right:3.5%;
+}
+
+#login {
+    width: 20%;
+    margin: 0 auto;
+}
+
+#login>.form-group {
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+#login>.btn {
+    margin-top:1%;
+    margin-bottom: 1%;
+}
+
+#subject-form {
+    margin: 0 auto;
+    width: 60%;
+}
+
+#subjects-results {
+    margin: 0 auto;
+    margin-top: 1%;
+    width: 50%;
+}
+
+#register {
+    margin-left: 20%;
+    text-align: center;
+    width: 60%;
+}
+
+#register>.row {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+#register>select {
+    width: 60%;
+}
+
+.list-group-item {
+    margin-top: 1%;
+}
+
+#profile>.ms-2 {
+    text-align:left'
+}
+
+

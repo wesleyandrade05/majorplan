@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<form action="/edit" method="post">
+<table class="table" style="width: 50%; margin: 0 auto">
+    <tbody>
+        <tr>
+            <th scope="row">netID</th>
+            <td>{{user.netID}}</td>
+        </tr>
+        <tr>
+            <th scope="row">First Name</th>
+            <td><input type="text" class="form-control" name="first_name" value="{{user.first_name}}" placeholder="{{user.first_name}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Last Name</th>
+            <td><input type="text" class="form-control" name="last_name" value="{{user.last_name}}" placeholder="{{user.last_name}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Major</th>
+            <td><input type="text" class="form-control" name="major" value="{{user.major}}" placeholder="{{user.major}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Class</th>
+            <td><input type="text" class="form-control" name="class" value="{{user.class}}" placeholder="{{user.class}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">email</th>
+            <td><input type="email" class="form-control" name="email" value="{{user.email}}" placeholder="{{user.email}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">College</th>
+            <td><input type="text" class="form-control" name="college" value="{{user.college}}" placeholder="{{user.college}}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">Major Requirements</th>
+            <td><input type="number" class="form-control" name="major_requirements" min="0" value="{{user.major_requirements}}" placeholder="{{user.major_requirements}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Humanities Requirements</th>
+            <td><input type="number" class="form-control" name="hum_requirements" min="0" value="{{user.hum_requirements}}" placeholder="{{user.hum_requirements}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Science Requirements</th>
+            <td><input type="number" class="form-control" name="sci_requirements" min="0" value="{{user.sci_requirements}}" placeholder="{{user.sci_requirements}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Social Science Requirements</th>
+            <td><input type="number" class="form-control" name="social_requirements" min="0" value="{{user.social_requirements}}" placeholder="{{user.social_requirements}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Language Requirements</th>
+            <td><input type="number" class="form-control" name="lang_requirements" min="0" value="{{user.lang_requirements}}" placeholder="{{user.lang_requirements}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Quantitative Reasoning Requirements</th>
+            <td><input type="number" class="form-control" name="qr_requirements" min="0" value="{{user.qr_requirements}}" placeholder="{{user.wr_requirements}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Writing Requirements</th>
+            <td><input type="number" class="form-control" name="wri_requirements" min="0" value="{{user.wri_requirements}}" placeholder="{{user.wri_requirements}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Graduation Requirements</th>
+            <td><input type="number" class="form-control" name="grad_requirements" min="0" value="{{user.grad_requirements}}" placeholder="{{user.grad_requirements}}"></td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="2">Change Password</th>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="password" name="current_password" placeholder="Current Password"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="password" name="new_password" placeholder="New Password"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="password" name="confirmation" placeholder="Confirm Password"></td>
+        </tr>
+    </tbody>
+</table>
+<button type="submit" class="btn btn-primary" style="margin-top: 1.5%">Submit</button>
+</form>
+{% endblock %}

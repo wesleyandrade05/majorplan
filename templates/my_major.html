@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+{% if missing > 0 %}
+    <h4>Missing {{missing}} credits</h4>
+{% else %}
+    <h4>Congratulations! You have taken all the credits necessary to your major!</h4>
+{% endif %}
+
+{% for course in courses %}
+    <ul class="list-group list-group-horizontal-sm">
+        <li class="list-group-item list-group-item-primary flex-fill" style="padding-top: 2%">{{course.subjectNumber}}</li>
+        <li class="list-group-item list-group-item-primary flex-fill" style="width: 400px">
+            {{course.courseTitle}}
+                <small>{{course.prerequisites | safe}}</small>
+        </li>
+        <li class="list-group-item list-group-item-primary flex-fill" style="padding-top: 2%">{{course.term}}</li>
+    </ul>
+{% endfor %}
+{% endblock %}

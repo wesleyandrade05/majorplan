@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<form action="/register" method="post" id="register">
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="First name" required name="first_name">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Last name" required name="last_name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="netID" required name="netID">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Class" required name="year">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Major" required name="major">
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="email" class="form-control" placeholder="Yale Email" required name="email">
+    </div>
+    <select class="custom-select my-1 mr-sm-2" id="college" required name="college">
+      <option selected>College</option>
+      <option value="Benjamin Franklin">Benjamin Franklin</option>
+      <option value="Branford">Branford</option>
+      <option value="Ezra Stiles">Ezra Stiles</option>
+      <option value="Jonathan Edwards">Jonathan Edwards</option>
+      <option value="Pauli Murray">Pauli Murray</option>
+      <option value="Saybrook">Saybrook</option>
+      <option value="Timothy Dwight">Timothy Dwight</option>
+      <option value="Berkeley">Berkeley</option>
+      <option value="Davenport">Davenport</option>
+      <option value="Grace Hopper">Grace Hopper</option>
+      <option value="Morse">Morse</option>
+      <option value="Pierson">Pierson</option>
+      <option value="Silliman">Silliman</option>
+      <option value="Trumbull">Trumbull</option>
+    </select>
+    <div class="form-group">
+      <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
+    </div>
+    <div class="form-group" style="margin-top: 1%">
+      <input type="password" class="form-control" id="confirmation" name="confirmation" required placeholder="Confirm Password">
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top: 1%">Register</button>
+  </form>
+{% endblock %}

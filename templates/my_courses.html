@@ -1,0 +1,199 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<form action="/my_courses" method="post">
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Course</th>
+      <th scope="col">Term</th>
+      <th scope="col">Distributional</th>
+      <th scope="col">Course Title</th>
+      <th scope="col">Syllabus</th>
+      <th scope="col">Taking?</th>
+      <th scope="col">When?</th>
+      <th scope="col">Take?</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for course in courses %}
+      <tr>
+        <td>
+          <form action="/remove_course" method="post">
+            <button type="submit" class="btn btn-danger btn-sm" value="{{course.crn}}" name="course">Remove</button>
+          </form>
+        </td>
+        <td>{{course.subjectNumber}}</td>
+        <td>{{course.termCode}}</td>
+        <td>{{course.distributional}}</td>
+        <td>{{course.courseTitle}}</td>
+        <td>
+          {% if course.syllabusLink != NULL %}
+            <a href="{{course.syllabusLink}}" target="_blank">Link</a>
+          {% else %}
+            None
+          {% endif %}
+        </td>
+        <td>
+          {% if course.taking == 1 %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+        </td>
+        <td>
+          {% if course.taking == 0 %}
+          <select class="form-select form-select-sm" aria-label="Default select example" name="term-selection_{{course.crn}}">
+            <option value="">Choose a Term</option>
+            <option value="First Year Fall">First Year Fall</option>
+            <option value="First Year Spring">First Year Spring</option>
+            <option value="Sophomore Fall">Sophomore Fall</option>
+            <option value="Sophomore Spring">Sophomore Spring</option>
+            <option value="Junior Fall">Junior Fall</option>
+            <option value="Junior Spring">Junior Spring</option>
+            <option value="Senior Fall">Senior Fall</option>
+            <option value="Senior Spring">Senior Spring</option>
+          </select>
+          {% else %}
+            {% if course.term != NULL %}
+              {{course.term}}
+            <input type="hidden" name="term-selection_{{course.crn}}" value="{{course.term}}">
+            {% else %}
+              Not specified
+              <input type="hidden" name="term-selection_{{course.crn}}" value="{{course.term}}">
+            {% endif %}
+          {% endif %}
+        </td>
+        <td>
+          {% if course.taking == 0 %}
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="on" id="add_{{course.crn}}" name="add_{{course.crn}}">
+            </div>
+          {% else %}
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="on" id="add_{{course.crn}}" name="add_{{course.crn}}" checked>
+            </div>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<button type="submit" class="btn btn-primary">
+  Save
+</button>
+
+</form>
+
+<table class="table" style="margin-top: 3%">
+  <thead>
+    <tr>
+      <th colspan="4">Fall Schedule</th>
+    </tr>
+    <tr>
+      <th>First Year</th>
+      <th>Sophomore</th>
+      <th>Junior</th>
+      <th>Senior</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>
+          <table class="table table-borderless">
+            {% for course in plan["First Year Fall"] %}
+              <tr>
+                <td>{{course}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+        </td>
+        <td>
+        <table class="table table-borderless">
+          {% for course in plan["Sophomore Fall"] %}
+            <tr>
+              <td>{{course}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+        </td>
+        <td>
+        <table class="table table-borderless">
+          {% for course in plan["Junior Fall"] %}
+            <tr>
+              <td>{{course}}</td>
+           </tr>
+         {% endfor %}
+        </table>
+      </td>
+      <td>
+      <table class="table table-borderless">
+        {% for course in plan["Senior Fall"] %}
+          <tr>
+            <td>{{course}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="4">Spring Schedule</th>
+    </tr>
+    <tr>
+      <th>First Year</th>
+      <th>Sophomore</th>
+      <th>Junior</th>
+      <th>Senior</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>
+          <table class="table table-borderless">
+            {% for course in plan["First Year Spring"] %}
+              <tr>
+                <td>{{course}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+        </td>
+        <td>
+        <table class="table table-borderless">
+          {% for course in plan["Sophomore Spring"] %}
+            <tr>
+              <td>{{course}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+        </td>
+        <td>
+        <table class="table table-borderless">
+          {% for course in plan["Junior Spring"] %}
+            <tr>
+              <td>{{course}}</td>
+           </tr>
+         {% endfor %}
+        </table>
+      </td>
+      <td>
+      <table class="table table-borderless">
+        {% for course in plan["Senior Spring"] %}
+          <tr>
+            <td>{{course}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}

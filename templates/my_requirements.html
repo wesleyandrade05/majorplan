@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    {% if to_graduate > 0 %}
+        <h4>{{to_graduate}} credits to Graduate</h4>
+    {% else %}
+        <h4>Congratulations! You have taken all the credits necessary to graduate! Just make sure you are not missing any Distributional Requirement!</h4>
+    {% endif %}
+
+    <h4>General Distributional Requirements:</h4>
+    <table class="table table-sm" style="width: 70%; margin: 0 auto; margin-top: 2%">
+        <thead>
+            <th scope="col">Distributional Requirement</th>
+            <th scope="col">Credits Taken</th>
+            <th scope="col">Necessary Credits</th>
+            <th scope="col">To Go</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Science</th>
+                <td>{{control.YCSC}}</td>
+                <td>{{std_reqs.sci_requirements}}</td>
+                <td>{{reqs.YCSC}}</td>
+            </tr>
+            <tr>
+                <th>Social Science</th>
+                <td>{{control.YCSO}}</td>
+                <td>{{std_reqs.social_requirements}}</td>
+                <td>{{reqs.YCSO}}</td>
+            </tr>
+            <tr>
+                <th>Humanities</th>
+                <td>{{control.YCHU}}</td>
+                <td>{{std_reqs.hum_requirements}}</td>
+                <td>{{reqs.YCHU}}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{control.YCLA}}</td>
+                <td>{{std_reqs.lang_requirements}}</td>
+                <td>{{reqs.YCLA}}</td>
+            </tr>
+            <tr>
+                <th>Quantitative Reasoning</th>
+                <td>{{control.YCQR}}</td>
+                <td>{{std_reqs.qr_requirements}}</td>
+                <td>{{reqs.YCQR}}</td>
+            </tr>
+            <tr>
+                <th>Writing</th>
+                <td>{{control.YCWR}}</td>
+                <td>{{std_reqs.wri_requirements}}</td>
+                <td>{{reqs.YCWR}}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
